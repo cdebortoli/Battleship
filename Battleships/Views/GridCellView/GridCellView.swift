@@ -9,8 +9,10 @@
 import UIKit
 
 class GridCellView: UIView {
-    
-    var cell: GridCell = GridCell(x: 0, y: 0)
+
+    var x: Int = -1
+    var y: Int = -1
+    var currentType: GridCellType = .blank
     
     override init(frame: CGRect) {
         
@@ -25,11 +27,12 @@ class GridCellView: UIView {
         
     }
     
-    init(cell: GridCell) {
+    convenience init(cell: GridCell) {
         
-        self.cell = cell
-        super.init(frame: CGRect.zero)
-        
+        self.init(frame: CGRect.zero)
+        x = cell.x
+        y = cell.y
+        currentType = cell.currentType
     }
     
     func setup() {

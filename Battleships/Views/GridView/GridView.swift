@@ -10,10 +10,6 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-struct GridViewConfiguration {
-    var size: Int
-    var name: String
-}
 
 class GridView: UIView {
     
@@ -26,6 +22,7 @@ class GridView: UIView {
         setup()
         
     }
+    
     required init?(coder aDecoder: NSCoder) {
         
         super.init(coder: aDecoder)
@@ -55,9 +52,6 @@ class GridView: UIView {
                 self?.subviews.count != (configuration.size * configuration.size)
             }
             .subscribe(onNext: { [weak self] (configuration, cells) in
-                
-                guard let strongSelf = self else { return }
-                
                 // Clean
                 self?.subviews.forEach({ subview in
                     subview.removeFromSuperview()
@@ -67,8 +61,7 @@ class GridView: UIView {
                 var cellViews = [GridCellView]()
                 cells
                     .forEach({ cell in
-                        let cellView = GridCellView()
-                        cellView.cell = cell
+                        let cellView = GridCellView(cell: cell)
                         cellView.translatesAutoresizingMaskIntoConstraints = false
                         
                         self?.addSubview(cellView)
@@ -82,83 +75,50 @@ class GridView: UIView {
         
     }
     
-    func setConstraints(cellView: GridCellView, cellViews: [GridCellView], configuration: GridViewConfiguration) {
+}
+
+extension GridView {
+    
+    func setConstraints(cellView: GridCellView, cellViews: [GridCellView], configuration: GridConfiguration) {
         
         if let firstCell = cellViews.first {
             cellView.heightAnchor.constraint(equalTo: firstCell.heightAnchor).isActive = true
             cellView.widthAnchor.constraint(equalTo: firstCell.widthAnchor).isActive = true
         }
         
-        if cellView.cell.y == 0 {
-            // Constraint to top superview
+        if cellView.y == 0 {
             cellView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor).isActive = true
-        } else if cellView.cell.y == configuration.size - 1 {
-            // Constraint to cell view y - 1, same X
-            if let previousYCell = cellViews.filter({ $0.cell.y == cellView.cell.y - 1 && $0.cell.x == cellView.cell.x }).first {
+        } else if cellView.y == configuration.size - 1 {
+            if let previousYCell = GridView.previousVerCellView(from: cellView, in: cellViews) {
                 cellView.topAnchor.constraint(equalTo: previousYCell.bottomAnchor).isActive = true
             }
-            // constraint to bottom superview
             cellView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor).isActive = true
         } else {
-            // Constraint to cell view y - 1, same X
-            if let previousYCell = cellViews.filter({ $0.cell.y == cellView.cell.y - 1 && $0.cell.x == cellView.cell.x }).first {
+            if let previousYCell = GridView.previousVerCellView(from: cellView, in: cellViews) {
                 cellView.topAnchor.constraint(equalTo: previousYCell.bottomAnchor).isActive = true
             }
         }
-        if cellView.cell.x == 0 {
-            // Constraint to leading
+        
+        if cellView.x == 0 {
             cellView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor).isActive = true
-        } else if cellView.cell.x == configuration.size - 1 {
-            // Constraint to cell view x -1, same Y
-            if let previousXCell = cellViews.filter({ $0.cell.x == cellView.cell.x - 1 && $0.cell.y == cellView.cell.y }).first {
+        } else if cellView.x == configuration.size - 1 {
+            if let previousXCell = GridView.previousHorCellView(from: cellView, in: cellViews) {
                 cellView.leadingAnchor.constraint(equalTo: previousXCell.trailingAnchor).isActive = true
             }
-            // constraint to trailing superview
             cellView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor).isActive = true
-            
         } else {
-            // Constraint to cell view x -1, same Y
-            if let previousXCell = cellViews.filter({ $0.cell.x == cellView.cell.x - 1 && $0.cell.y == cellView.cell.y }).first {
+            if let previousXCell = GridView.previousHorCellView(from: cellView, in: cellViews) {
                 cellView.leadingAnchor.constraint(equalTo: previousXCell.trailingAnchor).isActive = true
             }
         }
         
     }
-}
-
-class GridViewModel {
     
-    var configurationOutput: Observable<GridViewConfiguration> { return configurationInput.asObservable() }
-    var configurationInput = BehaviorRelay<GridViewConfiguration>(value: GridViewConfiguration(size: 6, name: "default"))
-    
-    var cellsOutput : Observable<[GridCell]> { return cellsInput.asObservable() }
-    var cellsInput = PublishSubject<[GridCell]>()
-    
-    fileprivate var disposeBag = DisposeBag()
-    
-    func setup() {
-        
-        setupGridGeneration()
-        
+    static func previousHorCellView(from cellView: GridCellView, in cellViews: [GridCellView]) -> GridCellView? {
+        return cellViews.filter({ $0.x == cellView.x - 1 && $0.y == cellView.y }).first
     }
     
-    func setupGridGeneration() {
-        
-        configurationOutput
-            .map { configuration -> [GridCell] in
-                
-                var newCells = [GridCell]()
-                (0..<configuration.size).forEach { y in
-                    (0..<configuration.size).forEach { x in
-                        newCells.append(GridCell(x: x, y: y))
-                    }
-                }
-                return newCells
-                
-            }
-            .bind(to: cellsInput)
-            .disposed(by: disposeBag)
-        
+    static func previousVerCellView(from cellView: GridCellView, in cellViews: [GridCellView]) -> GridCellView? {
+        return cellViews.filter({ $0.y == cellView.y - 1 && $0.x == cellView.x }).first
     }
-    
 }
