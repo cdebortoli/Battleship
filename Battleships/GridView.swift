@@ -65,21 +65,11 @@ class GridView: UIView {
                 
                 // Init
                 var cellViews = [GridCellView]()
-//                var firstCellY = [Int: GridCellView]()
-//                var firstCellX = [Int: GridCellView]()
-                
                 cells
                     .forEach({ cell in
                         let cellView = GridCellView()
                         cellView.cell = cell
                         cellView.translatesAutoresizingMaskIntoConstraints = false
-                        
-//                        if firstCellY[cell.y] == nil {
-//                            firstCellY[cell.y] = cellView
-//                        }
-//                        if firstCellX[cell.x] == nil {
-//                            firstCellX[cell.x] = cellView
-//                        }
                         
                         self?.addSubview(cellView)
                         self?.setConstraints(cellView: cellView, cellViews: cellViews, configuration: configuration)
@@ -172,11 +162,3 @@ class GridViewModel {
     }
     
 }
-
-
-/*
- 
- cellView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: CGFloat(1.0)/CGFloat(configuration.size))
- cellView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: CGFloat(1.0)/CGFloat(configuration.size))
-
- */
