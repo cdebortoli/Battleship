@@ -12,7 +12,7 @@ import RxCocoa
 class GridViewModel {
     
     var configurationOutput: Observable<GridConfiguration> { return configurationInput.asObservable() }
-    var configurationInput = BehaviorRelay<GridConfiguration>(value: GridConfiguration(size: 6, name: "default"))
+    var configurationInput = BehaviorRelay<GridConfiguration>(value: GridConfiguration(size: 15, name: "default"))
     
     var cellsOutput : Observable<[GridCell]> { return cellsInput.asObservable() }
     var cellsInput = PublishSubject<[GridCell]>()

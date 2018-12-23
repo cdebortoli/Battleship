@@ -6,6 +6,8 @@
 //  Copyright © 2018 CDB. All rights reserved.
 //
 
+// TODO : Content view for the Grid
+// Top and left view for the counters
 import UIKit
 import RxSwift
 import RxCocoa
