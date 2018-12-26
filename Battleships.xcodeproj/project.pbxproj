@@ -23,6 +23,7 @@
 		8E3C4B9D21D0F48400F19877 /* GridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3C4B8C21CF904400F19877 /* GridCell.swift */; };
 		8E3C4B9E21D0F48A00F19877 /* GridCellType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3C4B8F21CF907900F19877 /* GridCellType.swift */; };
 		8E3C4B9F21D0F49400F19877 /* GridConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3C4B9821CFDC8500F19877 /* GridConfiguration.swift */; };
+		8E3C4BA221D3C1F300F19877 /* GridCountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3C4BA121D3C1F300F19877 /* GridCountView.swift */; };
 		BFB8FE4BE14852D5C249928A /* Pods_Battleships.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62DE65D56657021561F7C633 /* Pods_Battleships.framework */; };
 		CEAD24E90B9DA9EEA2A437F9 /* Pods_BattleshipsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F84DCECC4DCC254750EFE8C /* Pods_BattleshipsTests.framework */; };
 /* End PBXBuildFile section */
@@ -59,6 +60,7 @@
 		8E3C4B9121CF96D200F19877 /* GridCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridCellView.swift; sourceTree = "<group>"; };
 		8E3C4B9621CFDC2900F19877 /* GridViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridViewModel.swift; sourceTree = "<group>"; };
 		8E3C4B9821CFDC8500F19877 /* GridConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridConfiguration.swift; sourceTree = "<group>"; };
+		8E3C4BA121D3C1F300F19877 /* GridCountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridCountView.swift; sourceTree = "<group>"; };
 		9D40CB82A7B6F3C8CFE9D2B6 /* Pods-BattleshipsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BattleshipsTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-BattleshipsTests/Pods-BattleshipsTests.release.xcconfig"; sourceTree = "<group>"; };
 		CEF9639700C3E9AA82F424E7 /* Pods-BattleshipsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BattleshipsTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BattleshipsTests/Pods-BattleshipsTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -158,6 +160,7 @@
 		8E3C4B9421CFDC1400F19877 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				8E3C4BA021D3C1DD00F19877 /* GridCountView */,
 				8E3C4B9B21CFDCD000F19877 /* GridCellView */,
 				8E3C4B9A21CFDCC600F19877 /* GridView */,
 			);
@@ -195,6 +198,14 @@
 				8E3C4B8821CF8F1E00F19877 /* GameViewModel.swift */,
 			);
 			path = GameViewController;
+			sourceTree = "<group>";
+		};
+		8E3C4BA021D3C1DD00F19877 /* GridCountView */ = {
+			isa = PBXGroup;
+			children = (
+				8E3C4BA121D3C1F300F19877 /* GridCountView.swift */,
+			);
+			path = GridCountView;
 			sourceTree = "<group>";
 		};
 		EA08448B3F6F095C8FB44CCC /* Pods */ = {
@@ -391,6 +402,7 @@
 			files = (
 				8E3C4B9721CFDC2900F19877 /* GridViewModel.swift in Sources */,
 				8E3C4B8921CF8F1E00F19877 /* GameViewModel.swift in Sources */,
+				8E3C4BA221D3C1F300F19877 /* GridCountView.swift in Sources */,
 				8E3C4B8721CF8F1100F19877 /* GameViewController.swift in Sources */,
 				8E3C4B9921CFDC8500F19877 /* GridConfiguration.swift in Sources */,
 				8E3C4B8B21CF902500F19877 /* GridView.swift in Sources */,

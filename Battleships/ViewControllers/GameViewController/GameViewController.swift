@@ -49,7 +49,7 @@ class GameViewController: UIViewController {
                                     .withLatestFrom(gridView.viewModel.configurationOutput)
        Observable
         .merge(gridView.viewModel.configurationOutput, updateGridViewSize)
-        .map { GameViewController.gridViewSize(configuration: $0) }
+        .map { GridView.size(configuration: $0) }
         .map { [weak self] gridViewSize -> (scrollViewSize: CGFloat, gridViewSize: CGFloat) in
             guard let strongSelf = self else { return (scrollViewSize: 320.0 , gridViewSize: gridViewSize) }
             let scrollViewSize = min(strongSelf.gridScrollView.bounds.height, strongSelf.gridScrollView.bounds.width)
@@ -85,9 +85,4 @@ extension GameViewController: UIScrollViewDelegate {
         
     }
     
-    static func gridViewSize(configuration: GridConfiguration) -> CGFloat {
-        
-        return CGFloat(configuration.size) * CGFloat(44)
-        
-    }
 }
