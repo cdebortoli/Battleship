@@ -16,6 +16,7 @@ import RxCocoa
 class GridView: UIView {
     
     var viewModel = GridViewModel()
+    var cellViews = [String: GridCellView]()
     fileprivate var disposeBag = DisposeBag()
 
     override init(frame: CGRect) {
@@ -54,22 +55,24 @@ class GridView: UIView {
                 self?.subviews.count != (configuration.size * configuration.size)
             }
             .subscribe(onNext: { [weak self] (configuration, cells) in
+                guard let strongSelf = self else { return }
+                
                 // Clean
                 self?.subviews.forEach({ subview in
                     subview.removeFromSuperview()
                 })
                 
                 // Init
-                var cellViews = [GridCellView]()
                 cells
                     .forEach({ cell in
                         let cellView = GridCellView(cell: cell)
                         cellView.translatesAutoresizingMaskIntoConstraints = false
                         
                         self?.addSubview(cellView)
-                        self?.setConstraints(cellView: cellView, cellViews: cellViews, configuration: configuration)
-                        cellViews.append(cellView)
-                        
+                        self?.setConstraints(cellView: cellView, cellViews: strongSelf.cellViews, configuration: configuration)
+                        if let id = cellView.id {
+                            self?.cellViews[id] = cellView
+                        }
                     })
                 
             })
@@ -81,9 +84,9 @@ class GridView: UIView {
 
 extension GridView {
     
-    func setConstraints(cellView: GridCellView, cellViews: [GridCellView], configuration: GridConfiguration) {
+    func setConstraints(cellView: GridCellView, cellViews: [String: GridCellView], configuration: GridConfiguration) {
         
-        if let firstCell = cellViews.first {
+        if let firstCell = cellViews[GridCellView.idFirstCell()] {
             cellView.heightAnchor.constraint(equalTo: firstCell.heightAnchor).isActive = true
             cellView.widthAnchor.constraint(equalTo: firstCell.widthAnchor).isActive = true
         }
@@ -116,11 +119,13 @@ extension GridView {
         
     }
     
-    static func previousHorCellView(from cellView: GridCellView, in cellViews: [GridCellView]) -> GridCellView? {
-        return cellViews.filter({ $0.x == cellView.x - 1 && $0.y == cellView.y }).first
+    static func previousHorCellView(from cellView: GridCellView, in cellViews: [String: GridCellView]) -> GridCellView? {
+        let id = GridCellView.id(x: cellView.x - 1, y: cellView.y)
+        return cellViews[id]
     }
     
-    static func previousVerCellView(from cellView: GridCellView, in cellViews: [GridCellView]) -> GridCellView? {
-        return cellViews.filter({ $0.y == cellView.y - 1 && $0.x == cellView.x }).first
+    static func previousVerCellView(from cellView: GridCellView, in cellViews: [String: GridCellView]) -> GridCellView? {
+        let id = GridCellView.id(x: cellView.x, y: cellView.y - 1)
+        return cellViews[id]
     }
 }

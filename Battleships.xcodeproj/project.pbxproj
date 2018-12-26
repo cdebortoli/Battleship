@@ -20,6 +20,9 @@
 		8E3C4B9221CF96D200F19877 /* GridCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3C4B9121CF96D200F19877 /* GridCellView.swift */; };
 		8E3C4B9721CFDC2900F19877 /* GridViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3C4B9621CFDC2900F19877 /* GridViewModel.swift */; };
 		8E3C4B9921CFDC8500F19877 /* GridConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3C4B9821CFDC8500F19877 /* GridConfiguration.swift */; };
+		8E3C4B9D21D0F48400F19877 /* GridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3C4B8C21CF904400F19877 /* GridCell.swift */; };
+		8E3C4B9E21D0F48A00F19877 /* GridCellType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3C4B8F21CF907900F19877 /* GridCellType.swift */; };
+		8E3C4B9F21D0F49400F19877 /* GridConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3C4B9821CFDC8500F19877 /* GridConfiguration.swift */; };
 		BFB8FE4BE14852D5C249928A /* Pods_Battleships.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62DE65D56657021561F7C633 /* Pods_Battleships.framework */; };
 		CEAD24E90B9DA9EEA2A437F9 /* Pods_BattleshipsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F84DCECC4DCC254750EFE8C /* Pods_BattleshipsTests.framework */; };
 /* End PBXBuildFile section */
@@ -402,7 +405,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E3C4B9F21D0F49400F19877 /* GridConfiguration.swift in Sources */,
 				8E3C4B7C21CF8D4800F19877 /* BattleshipsTests.swift in Sources */,
+				8E3C4B9D21D0F48400F19877 /* GridCell.swift in Sources */,
+				8E3C4B9E21D0F48A00F19877 /* GridCellType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

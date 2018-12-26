@@ -13,6 +13,7 @@ class GridCellView: UIView {
     var x: Int = -1
     var y: Int = -1
     var currentType: GridCellType = .blank
+    var id: String?
     
     override init(frame: CGRect) {
         
@@ -33,6 +34,8 @@ class GridCellView: UIView {
         x = cell.x
         y = cell.y
         currentType = cell.currentType
+        id = GridCellView.id(cell: cell)
+        
     }
     
     func setup() {
@@ -47,4 +50,20 @@ class GridCellView: UIView {
         backgroundColor = .blue
         
     }
+}
+
+extension GridCellView {
+    
+    static func id(cell: GridCell) -> String {
+        return GridCellView.id(x: cell.x, y: cell.y)
+    }
+    
+    static func idFirstCell() -> String {
+        return GridCellView.id(x: 0, y: 0)
+    }
+    
+    static func id(x: Int, y: Int) -> String {
+        return "\(x)_\(y)"
+    }
+    
 }
