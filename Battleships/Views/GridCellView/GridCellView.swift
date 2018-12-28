@@ -49,6 +49,18 @@ class GridCellView: UIView {
         layer.borderWidth = 1.0
         backgroundColor = .blue
         
+        switch currentType {
+        case .blank:
+            // CODE
+            break
+        case .boat:
+            // CODE
+            break
+        case .water:
+            // Code
+            break
+        }
+        
     }
 }
 
